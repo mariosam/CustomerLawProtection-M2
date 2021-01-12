@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * XML config
+ * 
+ * @author      MarioSAM <eu@mariosam.com.br>
+ * @version     1.0.0
+ * @date        2020/10
+ * @copyright   Blog do Mario SAM
+ * 
+ * Show a message disclamer to user about our privacy (law LGPD/GDPL).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <!-- Set default values for fields of this module -->
+        <customerlawprotection>
+            <frontend_message>
+                <enabled>0</enabled>
+                <message><![CDATA[By using our site, you acknowledge that you have read and understand our <a href='/privacy-policy-cookie-restriction-mode' target='_blank'>Cookie Policy</a>, <a href='/privacy-policy-cookie-restriction-mode' target='_blank'>Privacy Policy</a>, and our <a href='/customer-service' target='_blank'>Terms of Service</a>.]]></message>
+                <position>bottom</position>
+                <cookietime>86400</cookietime>
+                <css></css>
+                <js></js>
+            </frontend_message>
+            <clp_next_version>
+               <my_contact>eu@mariosam.com.br</my_contact>
+            </clp_next_version>
+        </customerlawprotection>
+    </default>
+</config>

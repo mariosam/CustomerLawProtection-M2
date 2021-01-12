@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * XML system
+ * 
+ * @author      MarioSAM <eu@mariosam.com.br>
+ * @version     1.0.0
+ * @date        2020/10
+ * @copyright   Blog do Mario SAM
+ * 
+ * This XML prepare the admin page config of this module.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- Tab is the menu option at left [MARIOSAM] -->
+        <tab id="mariosam" translate="label" sortOrder="250">
+            <label>Mario SAM</label>
+        </tab>
+        <!-- Section is a sub-menu option inside Tab. -->
+        <section id="customerlawprotection" translate="label" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>GDPL Settings</label>
+            <tab>mariosam</tab>
+            <!-- resource is to ACL -->
+            <resource>MarioSAM_CustomerLawProtection::module_customerlawprotection_config</resource>
+            <!-- Group is the box at right with your config options. -->
+            <group id="frontend_message" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>User Frontend Message</label>
+                <comment><![CDATA[How to use GDPL? Access the Mario SAM blog and read the post.]]></comment>
+                <!-- Turn On or Turn off this module -->
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- Set the message to show the user about your policy -->
+                <field id="message" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message Alert</label>
+                    <comment>You can customize this message.</comment>
+                </field>
+                <!-- Position to show the message above -->
+                <field id="position" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Screen Position</label>
+                    <source_model>MarioSAM\CustomerLawProtection\Model\Config\Source\Position</source_model>
+                    <comment>Where do you want to show this message?</comment>
+                </field>
+                <!-- For how long time you mantein the client accept -->
+                <field id="cookietime" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookie Lifetime</label>
+                    <comment>In seconds. ex.: 3600 (1 hour); 86400 (1 day); 604800 (1 week).</comment>
+                </field>
+                <!-- User can customize the css -->
+                <field id="css" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom CSS</label>
+                    <comment>Additional CSS.</comment>
+                </field>
+                <!-- User can customize the javascript -->
+                <field id="js" translate="label" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Javascript</label>
+                    <comment>Additional Javascript.</comment>
+                </field>
+            </group>
+            <!-- Group to talk with the clients of this module. -->
+            <group id="clp_next_version" translate="label" type="text" sortOrder="999" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Expected for the next versions</label>
+                <comment>
+                    <![CDATA[Below a list of things that I expect to implement in the next version of GDPL module:]]>
+                </comment>
+                <field id="my_contact" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>My Contact</label>
+                    <comment>You can talk with me and/or hire me!</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

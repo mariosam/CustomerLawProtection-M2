@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * XML default
+ * 
+ * @author      MarioSAM <eu@mariosam.com.br>
+ * @version     1.0.0
+ * @date        2020/10
+ * @copyright   Blog do Mario SAM
+ * 
+ * Insert the new code into the Magento theme to load the phtml with popup code.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- soon as the page start to loading -->
+        <referenceContainer name="after.body.start">
+            <block name="consent.popup" as="consent_popup" template="MarioSAM_CustomerLawProtection::consentpopup.phtml" ifconfig="customerlawprotection/frontend_message/enabled">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">MarioSAM\CustomerLawProtection\ViewModel\ConsentPopupViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

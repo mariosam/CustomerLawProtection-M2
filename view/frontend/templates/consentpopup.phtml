@@ -1,0 +1,120 @@
+<?php
+/**
+ * HTML consentpopup
+ * 
+ * @author      MarioSAM <eu@mariosam.com.br>
+ * @version     1.0.0
+ * @date        2020/10
+ * @copyright   Blog do Mario SAM
+ * 
+ * Create the html, css, javascript code to show the message GDPL.
+ */
+
+/** @var $viewModel MarioSAM\CustomerLawProtection\ViewModel\ConsentPopupViewModel */
+$viewModel = $block->getViewModel();
+
+/** inicializando model e variaveis */
+if ( $viewModel->getEnabled() ) {
+    
+$_position = $viewModel->getPosition();
+$_cookie = $viewModel->getCookieManager();
+$_cookietime = $viewModel->getCookieTime();
+$_message = $viewModel->getMessage();
+?>
+<?php /* CSS styles */ ?>
+<style>
+section.policy-terms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    <?php echo $_position; ?>: 0; /* bottom: 0; */
+    width: 100%;
+    text-align: center;
+    background: #1f4f66;
+    padding: 5px 20px;
+    line-height: 24px;
+    /* font-family: Montserrat; */
+    font-size: 14px;
+    color: #ffffff;
+    box-shadow: 0 5px 12px 14px rgba(0, 0, 0, .06);
+    z-index: 999;
+}
+.policy-terms p {
+    margin: 20px;
+    max-width: 900px;
+    text-align: left;
+}
+section.policy-terms a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+.policy-actions {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.policy-terms-actions span.accept-policy-terms {
+    margin: 5px 0;
+    padding: 5px 30px;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid;
+}
+.policy-terms-actions span.accept-policy-terms:hover {
+    background: #ffffff;
+    color: #1f4f66;
+}
+@media (max-width: 1024px) {
+    section.policy-terms { width: initial; }
+    section.policy-terms br { display: none; }
+}
+@media (max-width: 579px) {
+    section.policy-terms { flex-direction: column; }
+    .policy-terms p { margin: 0; text-align: center; }
+    .policy-terms-actions { margin: 10px 0 5px; }
+}
+
+<?php echo $viewModel->getCssCustom(); ?>
+</style>
+
+<?php /* Javascript controls */ ?>
+<script type="text/javascript">
+//<![CDATA[
+require([
+    'jquery',
+    'jquery/jquery.cookie'
+], function ($) {
+    $(document).ready(function () {
+        <?php /* recebe o valor do cookie se existir */ ?>
+        var check_cookie = "<?php echo $_cookie->getCookie('popup-policy'); ?>";
+        var popup = jQuery('.policy-terms');
+        setTimeout (function(){
+            <?php /* se NAO encontrou cookie */ ?>
+            if(check_cookie!=="true") {
+                popup.show(); //exibe alerta depois de 3000 (3 segundos)
+            }
+        },3000);
+        $('.close-policy-terms').click(function(){
+            <?php /* muda o status do cookie para aceito (true) */ ?>
+            document.cookie = 'popup-policy=true; path=/; max-age=<?php echo $_cookietime; ?>;';
+            <?php /* ao clicar no botao de aceitar, fecha o popup */ ?>
+            popup.fadeOut();
+        });
+
+        <?php echo $viewModel->getJsCustom(); ?>
+    });
+});
+//]]>
+</script>
+<?php /* HTLM displays */ ?>
+<section class="policy-terms" style="display:none;">
+    <p><?php echo $_message; ?></p>
+    <div class="policy-terms-actions close-policy-terms">
+        <span class="accept-policy-terms"><?= __('Accept')?></span>
+    </div>
+</section>
+
+<?php } /* if modulo esta ativo */ ?>
